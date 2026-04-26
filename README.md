@@ -32,7 +32,7 @@ The MailSlurp library uses the `reqwest` HTTP client and async functions. Add `t
 ```toml
 [dependencies]
 tokio = { version = "1.4.0", features = ["full"] }
-reqwest = { version = "0.11", features = ["json", "multipart"] }
+reqwest = { version = "0.13", features = ["json", "multipart"] }
 ```
 
 ## Configure

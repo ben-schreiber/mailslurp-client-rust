@@ -573,7 +573,6 @@ pub async fn upload_attachment_bytes(configuration: &configuration::Configuratio
 /// Email attachments are essentially files with meta data. Files are byte arrays and the meta data is a content type and a filename. These properties allow email clients to display the filename and icon etc. When sending emails with attachments first upload each attachment with an upload endpoint. Record the returned attachment ID and use it with subsequent email sending. For legacy reasons the ID is returned as the first element in an array. Only a single ID is ever returned. To send the attachments pass a list of attachment IDs with `SendEmailOptions` when sending an email. Using the upload endpoints prior to sending mean attachments can easily be reused.
 pub async fn upload_multipart_form(configuration: &configuration::Configuration, params: UploadMultipartFormParams) -> Result<Vec<String>, Error<UploadMultipartFormError>> {
     // unbox the parameters
-    let file = params.file;
     let content_type = params.content_type;
     let filename = params.filename;
     let x_filename = params.x_filename;
@@ -604,7 +603,7 @@ pub async fn upload_multipart_form(configuration: &configuration::Configuration,
         };
         local_var_req_builder = local_var_req_builder.header("x-api-key", local_var_value);
     };
-    let mut local_var_form = reqwest::multipart::Form::new();
+    let local_var_form = reqwest::multipart::Form::new();
     // TODO: support file upload for 'file' parameter
     local_var_req_builder = local_var_req_builder.multipart(local_var_form);
 
